@@ -1,0 +1,2233 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ahmed Said - Portfolio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a3a5c;
+            --secondary: #c8873e;
+            --accent: #f4f7f6;
+            --dark: #0f172a;
+            --light: #ffffff;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --gradient: linear-gradient(135deg, #1a3a5c 0%, #2d5a87 100%);
+            --gold-gradient: linear-gradient(135deg, #c8873e 0%, #e6a84c 100%);
+            --whatsapp: #25D366;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Cairo', 'Poppins', sans-serif;
+            background: var(--accent);
+            color: var(--dark);
+            line-height: 1.7;
+            overflow-x: hidden;
+            transition: all 0.3s ease;
+        }
+        body[dir="ltr"] { font-family: 'Poppins', 'Cairo', sans-serif; }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+        .animate-fade-in {
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0;
+        }
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+        .delay-5 { animation-delay: 0.5s; }
+        .shake { animation: shake 0.5s ease; }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            transition: all 0.3s ease;
+        }
+        .nav.scrolled {
+            background: rgba(26,58,92,0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--light);
+            text-decoration: none;
+        }
+        .nav-logo span { color: var(--secondary); }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+        .nav-links a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px; left: 0;
+            width: 0; height: 2px;
+            background: var(--secondary);
+            transition: width 0.3s;
+        }
+        .nav-links a:hover { color: var(--secondary); }
+        .nav-links a:hover::after { width: 100%; }
+        .lang-toggle {
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: var(--light);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        .lang-toggle:hover {
+            background: var(--secondary);
+            border-color: var(--secondary);
+        }
+
+        /* Hero */
+        .hero {
+            background: var(--gradient);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: 50px 50px;
+            opacity: 0.3;
+        }
+        .hero-particles {
+            position: absolute;
+            width: 100%; height: 100%;
+            overflow: hidden;
+        }
+        .particle {
+            position: absolute;
+            width: 10px; height: 10px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+        .hero-text h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--light);
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+        .hero-text .subtitle {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+        .hero-text .bio {
+            color: rgba(255,255,255,0.85);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            max-width: 500px;
+        }
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+        .btn-primary {
+            background: var(--gold-gradient);
+            color: var(--light);
+            box-shadow: 0 4px 15px rgba(200,135,62,0.4);
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(200,135,62,0.6);
+        }
+        .btn-outline {
+            background: transparent;
+            color: var(--light);
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+        .btn-outline:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: var(--secondary);
+        }
+        .hero-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        .profile-card {
+            width: 320px; height: 320px;
+            border-radius: 50%;
+            border: 5px solid var(--secondary);
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: pulse 3s ease-in-out infinite;
+            background: linear-gradient(135deg, #2d5a87 0%, #1a3a5c 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .profile-card img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+            display: none;
+        }
+        .profile-card img.active {
+            display: block;
+        }
+        .profile-card:hover img {
+            transform: scale(1.05);
+        }
+        .profile-placeholder {
+            width: 100%; height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 6rem;
+            color: rgba(255,255,255,0.3);
+        }
+        .profile-placeholder.hidden {
+            display: none;
+        }
+        .profile-upload-btn {
+            position: absolute;
+            bottom: 10px;
+            right: 50%;
+            transform: translateX(50%);
+            background: var(--secondary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px; height: 50px;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            transition: all 0.3s;
+            z-index: 10;
+        }
+        .profile-upload-btn:hover {
+            transform: translateX(50%) scale(1.1);
+        }
+        .admin-mode .profile-upload-btn {
+            display: flex;
+        }
+
+        /* Sections */
+        .section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .section-title i {
+            color: var(--secondary);
+            font-size: 2rem;
+        }
+        .section-subtitle {
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+
+        /* CV Cards */
+        .cv-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .cv-card {
+            background: var(--light);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+        .cv-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        .cv-card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border);
+        }
+        .cv-card-header i {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            width: 45px; height: 45px;
+            background: rgba(200,135,62,0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .cv-card-header h3 {
+            font-size: 1.3rem;
+            color: var(--primary);
+        }
+        .cv-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+            padding: 0.8rem;
+            border-radius: 10px;
+            transition: background 0.3s;
+        }
+        .cv-item:hover { background: var(--accent); }
+        .cv-item i {
+            color: var(--secondary);
+            margin-top: 0.3rem;
+            font-size: 0.8rem;
+        }
+        .cv-item-content h4 {
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 0.2rem;
+        }
+        .cv-item-content p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+        .skill-tag {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: var(--gradient);
+            color: var(--light);
+            border-radius: 25px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin: 0.3rem;
+            transition: all 0.3s;
+            cursor: default;
+        }
+        .skill-tag:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(26,58,92,0.3);
+        }
+
+        /* Projects */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        .project-card {
+            background: var(--light);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            border: 1px solid var(--border);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+        }
+        .project-image {
+            height: 200px;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .project-image img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+        }
+        .project-image i {
+            font-size: 4rem;
+            color: rgba(255,255,255,0.3);
+        }
+        .project-overlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(26,58,92,0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .project-card:hover .project-overlay { opacity: 1; }
+        .project-overlay span {
+            color: var(--light);
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        .project-content { padding: 1.5rem; }
+        .project-category {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background: rgba(200,135,62,0.1);
+            color: var(--secondary);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+        }
+        .project-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        .project-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        .project-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .project-btn {
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        .project-btn-view {
+            background: var(--gradient);
+            color: var(--light);
+        }
+        .project-btn-view:hover { transform: scale(1.05); }
+        .project-btn-disabled {
+            background: var(--border);
+            color: var(--text-muted);
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+        .project-delete-btn {
+            background: #dc3545;
+            color: white;
+            display: none;
+        }
+        .admin-mode .project-delete-btn {
+            display: inline-flex;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-right: 2rem;
+        }
+        body[dir="ltr"] .timeline {
+            padding-right: 0;
+            padding-left: 2rem;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            right: 0; top: 0; bottom: 0;
+            width: 3px;
+            background: var(--gradient);
+            border-radius: 3px;
+        }
+        body[dir="ltr"] .timeline::before {
+            right: auto;
+            left: 0;
+        }
+        .timeline-item {
+            position: relative;
+            padding-right: 2rem;
+            margin-bottom: 2rem;
+        }
+        body[dir="ltr"] .timeline-item {
+            padding-right: 0;
+            padding-left: 2rem;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            right: -6px; top: 0.5rem;
+            width: 15px; height: 15px;
+            background: var(--secondary);
+            border-radius: 50%;
+            border: 3px solid var(--light);
+            box-shadow: 0 0 0 3px var(--secondary);
+        }
+        body[dir="ltr"] .timeline-item::before {
+            right: auto;
+            left: -6px;
+        }
+        .timeline-content {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        .timeline-date {
+            color: var(--secondary);
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        .timeline-title {
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.3rem;
+        }
+        .timeline-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Modals */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        .modal-overlay.active { display: flex; }
+        .modal {
+            background: var(--light);
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 600px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: fadeInUp 0.3s ease;
+        }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        .modal-header h2 {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        .modal-close:hover { color: var(--secondary); }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--secondary);
+        }
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        .form-group input[type="file"] {
+            padding: 0.5rem;
+        }
+        .image-preview {
+            max-width: 100%;
+            max-height: 200px;
+            border-radius: 10px;
+            margin-top: 0.5rem;
+            display: none;
+        }
+        .image-preview.show { display: block; }
+
+        /* Fixed Buttons */
+        .download-cv-btn {
+            position: fixed;
+            bottom: 2rem; left: 2rem;
+            z-index: 999;
+            background: var(--gold-gradient);
+            color: var(--light);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 20px rgba(200,135,62,0.4);
+            transition: all 0.3s;
+            animation: float 3s ease-in-out infinite;
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+        .download-cv-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(200,135,62,0.6);
+        }
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 2rem; right: 2rem;
+            z-index: 999;
+            background: var(--whatsapp);
+            color: var(--light);
+            width: 60px; height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            text-decoration: none;
+            box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+            transition: all 0.3s;
+            animation: float 3s ease-in-out infinite;
+            animation-delay: 1.5s;
+        }
+        .whatsapp-btn:hover {
+            transform: scale(1.1) translateY(-3px);
+            box-shadow: 0 8px 30px rgba(37,211,102,0.6);
+        }
+        .whatsapp-btn::before {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 70px;
+            right: 50%;
+            transform: translateX(50%);
+            background: var(--dark);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+        .whatsapp-btn:hover::before {
+            opacity: 1;
+        }
+        .admin-panel {
+            position: fixed;
+            top: 50%; right: 2rem;
+            transform: translateY(-50%);
+            z-index: 998;
+            display: none;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .admin-panel.active {
+            display: flex;
+        }
+        .admin-btn {
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            background: var(--light);
+            border: 2px solid var(--border);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            font-size: 1.2rem;
+        }
+        .admin-btn:hover {
+            background: var(--secondary);
+            color: var(--light);
+            transform: scale(1.1);
+        }
+        .admin-badge {
+            position: fixed;
+            top: 80px; left: 2rem;
+            z-index: 997;
+            background: #dc3545;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            display: none;
+            animation: fadeInUp 0.3s ease;
+        }
+        .admin-badge.active { display: block; }
+
+        /* Footer */
+        .footer {
+            background: var(--primary);
+            color: var(--light);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .footer-social {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .footer-social a {
+            width: 45px; height: 45px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--light);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .footer-social a:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+        }
+        .footer p { color: rgba(255,255,255,0.7); }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-content { grid-template-columns: 1fr; text-align: center; }
+            .hero-text h1 { font-size: 2.5rem; }
+            .hero-buttons { justify-content: center; }
+            .profile-card { width: 250px; height: 250px; }
+            .nav-links { display: none; }
+            .projects-grid { grid-template-columns: 1fr; }
+            .admin-panel { right: 1rem; }
+            .download-cv-btn { left: 1rem; bottom: 1rem; padding: 0.8rem 1.5rem; font-size: 0.9rem; }
+            .whatsapp-btn { right: 1rem; bottom: 5rem; width: 50px; height: 50px; font-size: 1.5rem; }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--accent); }
+        ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 5px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--secondary); }
+
+        /* Print */
+        @media print {
+            .admin-panel, .download-cv-btn, .whatsapp-btn, .nav, .hero-buttons, .project-actions, .modal-overlay, .admin-badge, .lang-toggle, .profile-upload-btn {
+                display: none !important;
+            }
+            .hero { min-height: auto; padding: 2rem; }
+            body { background: white; }
+            .section { padding: 1rem; page-break-inside: avoid; }
+        }
+
+        /* Login Modal */
+        .login-modal .modal {
+            max-width: 400px;
+            text-align: center;
+        }
+        .login-modal .modal h2 {
+            margin-bottom: 1.5rem;
+        }
+        .login-modal .form-group {
+            text-align: left;
+        }
+        body[dir="rtl"] .login-modal .form-group {
+            text-align: right;
+        }
+        .login-error {
+            color: #dc3545;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+        .login-error.show { display: block; }
+        .attempts-warning {
+            color: #ffc107;
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+        .attempts-warning.show { display: block; }
+        .lock-message {
+            color: #dc3545;
+            font-weight: 600;
+            display: none;
+        }
+        .lock-message.show { display: block; }
+
+        .login-btn {
+            position: fixed;
+            top: 100px;
+            right: 2rem;
+            z-index: 998;
+            background: var(--primary);
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            border: 2px solid var(--secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+        }
+        .login-btn:hover {
+            background: var(--secondary);
+            transform: scale(1.1);
+        }
+        .admin-mode .login-btn {
+            display: none;
+        }
+
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav" id="navbar">
+        <div class="nav-content">
+            <a href="#" class="nav-logo">Ahmed<span>Said</span></a>
+            <ul class="nav-links">
+                <li><a href="#home" data-key="nav_home">الرئيسية</a></li>
+                <li><a href="#about" data-key="nav_about">عني</a></li>
+                <li><a href="#skills" data-key="nav_skills">المهارات</a></li>
+                <li><a href="#portfolio" data-key="nav_portfolio">أعمالي</a></li>
+                <li><a href="#experience" data-key="nav_experience">الخبرة</a></li>
+                <li><a href="#contact" data-key="nav_contact">تواصل</a></li>
+                <li><button class="lang-toggle" onclick="toggleLanguage()" title="Change Language / تغيير اللغة">
+                    <i class="fas fa-globe"></i> <span id="langText">EN</span>
+                </button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-particles">
+            <div class="particle" style="top:10%; left:10%; animation-delay:0s;"></div>
+            <div class="particle" style="top:20%; left:80%; animation-delay:1s;"></div>
+            <div class="particle" style="top:60%; left:30%; animation-delay:2s;"></div>
+            <div class="particle" style="top:80%; left:70%; animation-delay:3s;"></div>
+            <div class="particle" style="top:40%; left:50%; animation-delay:4s;"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-text animate-fade-in">
+                <h1 data-key="hero_name">Ahmed Said<br>Ahmed Abd El Hameed</h1>
+                <p class="subtitle" data-key="hero_title">Web Developer & QA Specialist</p>
+                <p class="bio" data-key="hero_bio">
+                    مطور ويب متخصص في بناء تطبيقات الويب الحديثة باستخدام ASP.NET Core، React، و Node.js. 
+                    خبير في أتمتة العمليات باستخدام n8n وضمان الجودة.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#portfolio" class="btn btn-primary">
+                        <i class="fas fa-briefcase"></i> <span data-key="btn_works">أعمالي</span>
+                    </a>
+                    <a href="#contact" class="btn btn-outline">
+                        <i class="fas fa-envelope"></i> <span data-key="btn_contact">تواصل معي</span>
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image animate-fade-in delay-2">
+                <div class="profile-card" id="profileCard">
+                    <div class="profile-placeholder" id="profilePlaceholder">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <img id="profileImage" alt="Profile">
+                    <button class="profile-upload-btn" onclick="openProfileImageModal()" title="تغيير الصورة الشخصية">
+                        <i class="fas fa-camera"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+        <h2 class="section-title animate-fade-in">
+            <i class="fas fa-user-tie"></i> <span data-key="about_title">نبذة عني</span>
+        </h2>
+        <p class="section-subtitle animate-fade-in delay-1" data-key="about_subtitle">معلوماتي الشخصية والمهنية</p>
+
+        <div class="cv-grid">
+            <div class="cv-card animate-fade-in delay-2">
+                <div class="cv-card-header">
+                    <i class="fas fa-bullseye"></i>
+                    <h3 data-key="objective_title">الهدف المهني</h3>
+                </div>
+                <p style="color: var(--text-muted); line-height: 1.8;" data-key="objective_text">
+                    الحصول على وظيفة بدوام كامل في شركة متعددة الجنسيات توفر بيئة عمل احترافية 
+                    وتمكنني من النمو مع المساهمة في تحقيق أهداف الشركة.
+                </p>
+            </div>
+
+            <div class="cv-card animate-fade-in delay-3">
+                <div class="cv-card-header">
+                    <i class="fas fa-language"></i>
+                    <h3 data-key="languages_title">اللغات</h3>
+                </div>
+                <div class="cv-item">
+                    <i class="fas fa-circle"></i>
+                    <div class="cv-item-content">
+                        <h4 data-key="lang_arabic">العربية</h4>
+                        <p data-key="lang_arabic_level">اللغة الأم</p>
+                    </div>
+                </div>
+                <div class="cv-item">
+                    <i class="fas fa-circle"></i>
+                    <div class="cv-item-content">
+                        <h4 data-key="lang_english">الإنجليزية</h4>
+                        <p data-key="lang_english_level">كتابة ومحادثة جيدة</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cv-card animate-fade-in delay-4">
+                <div class="cv-card-header">
+                    <i class="fas fa-id-card"></i>
+                    <h3 data-key="personal_title">المعلومات الشخصية</h3>
+                </div>
+                <div class="cv-item">
+                    <i class="fas fa-calendar"></i>
+                    <div class="cv-item-content">
+                        <h4 data-key="birthdate">تاريخ الميلاد</h4>
+                        <p>16 يونيو 1989</p>
+                    </div>
+                </div>
+                <div class="cv-item">
+                    <i class="fas fa-flag"></i>
+                    <div class="cv-item-content">
+                        <h4 data-key="nationality">الجنسية</h4>
+                        <p data-key="nationality_value">مصري</p>
+                    </div>
+                </div>
+                <div class="cv-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <div class="cv-item-content">
+                        <h4 data-key="military">الخدمة العسكرية</h4>
+                        <p data-key="military_value">معفى</p>
+                    </div>
+                </div>
+                <div class="cv-item">
+                    <i class="fas fa-heart"></i>
+                    <div class="cv-item-content">
+                        <h4 data-key="marital">الحالة الاجتماعية</h4>
+                        <p data-key="marital_value">متزوج</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cv-card animate-fade-in delay-5">
+                <div class="cv-card-header">
+                    <i class="fas fa-lightbulb"></i>
+                    <h3 data-key="soft_skills_title">المهارات الشخصية</h3>
+                </div>
+                <div class="cv-item">
+                    <i class="fas fa-check"></i>
+                    <div class="cv-item-content"><p data-key="soft_skill_1">مبدع، موثوق، ذاتي التحفيز والتنظيم</p></div>
+                </div>
+                <div class="cv-item">
+                    <i class="fas fa-check"></i>
+                    <div class="cv-item-content"><p data-key="soft_skill_2">مهارات تواصل وتفاوض ممتازة</p></div>
+                </div>
+                <div class="cv-item">
+                    <i class="fas fa-check"></i>
+                    <div class="cv-item-content"><p data-key="soft_skill_3">مهارات حل مشكلات جيدة</p></div>
+                </div>
+                <div class="cv-item">
+                    <i class="fas fa-check"></i>
+                    <div class="cv-item-content"><p data-key="soft_skill_4">مهارات إدارة ضغط العمل</p></div>
+                </div>
+                <div class="cv-item">
+                    <i class="fas fa-check"></i>
+                    <div class="cv-item-content"><p data-key="soft_skill_5">القدرة على العمل فردياً وضمن فريق</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="section" id="skills" style="background: var(--light);">
+        <h2 class="section-title animate-fade-in">
+            <i class="fas fa-code"></i> <span data-key="skills_title">المهارات التقنية</span>
+        </h2>
+        <p class="section-subtitle animate-fade-in delay-1" data-key="skills_subtitle">التقنيات والأدوات التي أتقنها</p>
+
+        <div style="text-align: center;" class="animate-fade-in delay-2">
+            <span class="skill-tag"><i class="fab fa-windows"></i> MS Windows</span>
+            <span class="skill-tag"><i class="fas fa-file-word"></i> MS Office</span>
+            <span class="skill-tag"><i class="fab fa-html5"></i> HTML</span>
+            <span class="skill-tag"><i class="fab fa-css3-alt"></i> CSS</span>
+            <span class="skill-tag"><i class="fab fa-js"></i> JavaScript</span>
+            <span class="skill-tag">jQuery</span>
+            <span class="skill-tag"><i class="fab fa-react"></i> React JS</span>
+            <span class="skill-tag"><i class="fab fa-node"></i> Node.js</span>
+            <span class="skill-tag"><i class="fab fa-bootstrap"></i> Bootstrap</span>
+            <span class="skill-tag"><i class="fas fa-code"></i> C#</span>
+            <span class="skill-tag">ASP.NET Core</span>
+            <span class="skill-tag">ASP.NET MVC</span>
+            <span class="skill-tag"><i class="fas fa-database"></i> MySQL</span>
+            <span class="skill-tag"><i class="fas fa-palette"></i> Canva</span>
+            <span class="skill-tag"><i class="fas fa-video"></i> Capcut</span>
+            <span class="skill-tag">iMacros</span>
+            <span class="skill-tag">n8n Workflow Automation</span>
+            <span class="skill-tag"><i class="fas fa-plug"></i> API Integration</span>
+            <span class="skill-tag"><i class="fas fa-webhook"></i> Webhook Management</span>
+            <span class="skill-tag"><i class="fas fa-robot"></i> Process Automation</span>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section class="section" id="education">
+        <h2 class="section-title animate-fade-in">
+            <i class="fas fa-graduation-cap"></i> <span data-key="education_title">التعليم والشهادات</span>
+        </h2>
+        <p class="section-subtitle animate-fade-in delay-1" data-key="education_subtitle">المؤهلات العلمية والدورات التدريبية</p>
+
+        <div class="cv-grid">
+            <div class="cv-card animate-fade-in delay-2">
+                <div class="cv-card-header">
+                    <i class="fas fa-university"></i>
+                    <h3 data-key="edu_title">التعليم</h3>
+                </div>
+                <div class="cv-item">
+                    <i class="fas fa-circle"></i>
+                    <div class="cv-item-content">
+                        <h4 data-key="university">جامعة حلوان - كلية الحقوق</h4>
+                        <p data-key="degree">بكالوريوس الحقوق | 2005 - 2011 | تقدير جيد</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cv-card animate-fade-in delay-3">
+                <div class="cv-card-header">
+                    <i class="fas fa-certificate"></i>
+                    <h3 data-key="certs_title">الدورات والشهادات</h3>
+                </div>
+                <div class="cv-item">
+                    <i class="fas fa-circle"></i>
+                    <div class="cv-item-content">
+                        <h4>ICDL</h4>
+                        <p data-key="icdl_desc">International Computer Driving License</p>
+                    </div>
+                </div>
+                <div class="cv-item">
+                    <i class="fas fa-circle"></i>
+                    <div class="cv-item-content">
+                        <h4>Network+</h4>
+                        <p data-key="network_desc">Self-study</p>
+                    </div>
+                </div>
+                <div class="cv-item">
+                    <i class="fas fa-circle"></i>
+                    <div class="cv-item-content">
+                        <h4>CCNA</h4>
+                        <p data-key="ccna_desc">Self-study</p>
+                    </div>
+                </div>
+                <div class="cv-item">
+                    <i class="fas fa-circle"></i>
+                    <div class="cv-item-content">
+                        <h4 data-key="web_dev">Web Development</h4>
+                        <p>HTML, CSS, JavaScript, jQuery, React, Node.js</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="section" id="portfolio" style="background: var(--light);">
+        <h2 class="section-title animate-fade-in">
+            <i class="fas fa-folder-open"></i> <span data-key="portfolio_title">أعمالي و مشاريعي</span>
+        </h2>
+        <p class="section-subtitle animate-fade-in delay-1" data-key="portfolio_subtitle">المشاريع السابقة والأعمال المنفذة</p>
+
+        <div class="projects-grid" id="projectsContainer">
+            <!-- Project 1: Web Development -->
+            <div class="project-card animate-fade-in delay-2" data-project-id="1">
+                <div class="project-image">
+                    <i class="fas fa-globe"></i>
+                    <div class="project-overlay">
+                        <span><i class="fas fa-eye"></i> <span data-key="view_project">عرض المشروع</span></span>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <span class="project-category">Web Development</span>
+                    <h3 class="project-title" data-key="proj1_title">تصميم وتطوير مواقع الويب</h3>
+                    <p class="project-desc" data-key="proj1_desc">
+                        بناء مواقع ويب متجاورة وحديثة باستخدام React, HTML/CSS, و JavaScript مع تحسين SEO
+                    </p>
+                    <div class="project-actions">
+                        <button class="project-btn project-btn-view" onclick="showProjectDetails('web')">
+                            <i class="fas fa-eye"></i> <span data-key="btn_view">عرض</span>
+                        </button>
+                        <button class="project-btn project-btn-disabled" disabled title="الأعمال للعرض فقط">
+                            <i class="fas fa-lock"></i> <span data-key="btn_download">تحميل</span>
+                        </button>
+                        <button class="project-btn project-delete-btn" onclick="deleteProject(this)">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 2: Automation -->
+            <div class="project-card animate-fade-in delay-3" data-project-id="2">
+                <div class="project-image">
+                    <i class="fas fa-cogs"></i>
+                    <div class="project-overlay">
+                        <span><i class="fas fa-eye"></i> <span data-key="view_project">عرض المشروع</span></span>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <span class="project-category">Automation</span>
+                    <h3 class="project-title" data-key="proj2_title">n8n Workflow Automation</h3>
+                    <p class="project-desc" data-key="proj2_desc">
+                        تصميم وتنفيذ سير عمل آلي باستخدام n8n تشمل تكامل APIs، معالجة البيانات، webhooks، 
+                        المهام المجدولة، وربط خدمات متعددة
+                    </p>
+                    <div class="project-actions">
+                        <button class="project-btn project-btn-view" onclick="showProjectDetails('automation')">
+                            <i class="fas fa-eye"></i> <span data-key="btn_view">عرض</span>
+                        </button>
+                        <button class="project-btn project-btn-disabled" disabled title="الأعمال للعرض فقط">
+                            <i class="fas fa-lock"></i> <span data-key="btn_download">تحميل</span>
+                        </button>
+                        <button class="project-btn project-delete-btn" onclick="deleteProject(this)">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 3: Desktop Apps -->
+            <div class="project-card animate-fade-in delay-4" data-project-id="3">
+                <div class="project-image">
+                    <i class="fas fa-desktop"></i>
+                    <div class="project-overlay">
+                        <span><i class="fas fa-eye"></i> <span data-key="view_project">عرض المشروع</span></span>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <span class="project-category">Desktop Apps</span>
+                    <h3 class="project-title" data-key="proj3_title">تطبيقات سطح المكتب (ASP.NET Core & MVC)</h3>
+                    <p class="project-desc" data-key="proj3_desc">
+                        تطوير تطبيقات سطح مكتب قابلة للتنفيذ (.exe) باستخدام C#, ASP.NET Core 
+                        ومعمارية MVC مع تكامل قواعد البيانات
+                    </p>
+                    <div class="project-actions">
+                        <button class="project-btn project-btn-view" onclick="showProjectDetails('desktop')">
+                            <i class="fas fa-eye"></i> <span data-key="btn_view">عرض</span>
+                        </button>
+                        <button class="project-btn project-btn-disabled" disabled title="الأعمال للعرض فقط">
+                            <i class="fas fa-lock"></i> <span data-key="btn_download">تحميل</span>
+                        </button>
+                        <button class="project-btn project-delete-btn" onclick="deleteProject(this)">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="section" id="experience">
+        <h2 class="section-title animate-fade-in">
+            <i class="fas fa-briefcase"></i> <span data-key="experience_title">الخبرة العملية</span>
+        </h2>
+        <p class="section-subtitle animate-fade-in delay-1" data-key="experience_subtitle">مسيرتي المهنية والخبرات السابقة</p>
+
+        <div class="timeline animate-fade-in delay-2">
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date" data-key="current">حالياً</div>
+                    <div class="timeline-title">Quality Assurance - Remote</div>
+                    <div class="timeline-desc" data-key="job_qa">العمل عن بعد في مجال ضمان الجودة</div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date" data-key="previous">سابقاً</div>
+                    <div class="timeline-title">Xceed Company - Technical Support (Outsourcing)</div>
+                    <div class="timeline-desc" data-key="job_xceed">الدعم الفني</div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date" data-key="previous">سابقاً</div>
+                    <div class="timeline-title">TE Data - Second Level Technical Support / Follow Up</div>
+                    <div class="timeline-desc" data-key="job_tedata2">الدعم الفني المستوى الثاني والمتابعة</div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date" data-key="previous">سابقاً</div>
+                    <div class="timeline-title">TE Data - Field Installation & Repair (GOV)</div>
+                    <div class="timeline-desc" data-key="job_tedata_field">تركيب وصيانة ميدانية - قطاع حكومي</div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date" data-key="previous">سابقاً</div>
+                    <div class="timeline-title">TE Data - Workforce Salary Handling</div>
+                    <div class="timeline-desc" data-key="job_tedata_salary">إدارة رواتب القوى العاملة</div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date" data-key="previous">سابقاً</div>
+                    <div class="timeline-title">Egypt Sat Company - 2 Years</div>
+                    <div class="timeline-desc" data-key="job_egyptsat">شركة مصر للأقمار الصناعية - عامان</div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date" data-key="previous">سابقاً</div>
+                    <div class="timeline-title">Casper & Gambini's, Mall of Arabia</div>
+                    <div class="timeline-desc" data-key="job_casper">كاسبر آند جامبينيز - مول العربية</div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date" data-key="previous">سابقاً</div>
+                    <div class="timeline-title">Supervisor at El Khan Cafe</div>
+                    <div class="timeline-desc" data-key="job_khan">مشرف في مقهى الخان</div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date" data-key="previous">سابقاً</div>
+                    <div class="timeline-title">Translation: English - Arabic</div>
+                    <div class="timeline-desc" data-key="job_translation">الترجمة بين الإنجليزية والعربية</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interests Section -->
+    <section class="section" id="interests" style="background: var(--light);">
+        <h2 class="section-title animate-fade-in">
+            <i class="fas fa-heart"></i> <span data-key="interests_title">الاهتمامات</span>
+        </h2>
+        <p class="section-subtitle animate-fade-in delay-1" data-key="interests_subtitle">ما أحب القيام به في وقت فراغي</p>
+
+        <div class="cv-grid">
+            <div class="cv-card animate-fade-in delay-2">
+                <div class="cv-item">
+                    <i class="fas fa-laptop-code"></i>
+                    <div class="cv-item-content">
+                        <h4 data-key="interest_1">استكشاف التقنيات الجديدة</h4>
+                        <p data-key="interest_1_desc">التعلم الذاتي واستكشاف التقنيات الحديثة</p>
+                    </div>
+                </div>
+            </div>
+            <div class="cv-card animate-fade-in delay-3">
+                <div class="cv-item">
+                    <i class="fas fa-book"></i>
+                    <div class="cv-item-content">
+                        <h4 data-key="interest_2">القراءة والسفر</h4>
+                        <p data-key="interest_2_desc">قراءة الكتب والسفر لاستكشاف أماكن جديدة</p>
+                    </div>
+                </div>
+            </div>
+            <div class="cv-card animate-fade-in delay-4">
+                <div class="cv-item">
+                    <i class="fas fa-code"></i>
+                    <div class="cv-item-content">
+                        <h4 data-key="interest_3">دورات تطوير الويب</h4>
+                        <p data-key="interest_3_desc">التسويق بالعمولة وتطوير المهارات التقنية</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+        <h2 class="section-title animate-fade-in">
+            <i class="fas fa-envelope"></i> <span data-key="contact_title">تواصل معي</span>
+        </h2>
+        <p class="section-subtitle animate-fade-in delay-1" data-key="contact_subtitle">معلومات التواصل</p>
+
+        <div class="cv-grid" style="max-width: 800px; margin: 0 auto;">
+            <div class="cv-card animate-fade-in delay-2" style="text-align: center;">
+                <div class="cv-card-header" style="justify-content: center;">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h3 data-key="address_title">العنوان</h3>
+                </div>
+                <p style="color: var(--text-muted);">90 St - Hassan El Namer, Warak, Giza</p>
+            </div>
+            <div class="cv-card animate-fade-in delay-3" style="text-align: center;">
+                <div class="cv-card-header" style="justify-content: center;">
+                    <i class="fas fa-phone"></i>
+                    <h3 data-key="phone_title">الهاتف</h3>
+                </div>
+                <p style="color: var(--text-muted); direction: ltr;">01555793108</p>
+            </div>
+            <div class="cv-card animate-fade-in delay-4" style="text-align: center;">
+                <div class="cv-card-header" style="justify-content: center;">
+                    <i class="fas fa-envelope"></i>
+                    <h3 data-key="email_title">البريد الإلكتروني</h3>
+                </div>
+                <p style="color: var(--text-muted);">Midomoor09@gmail.com</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-social">
+                <a href="mailto:Midomoor09@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+                <a href="tel:01555793108" title="Phone"><i class="fas fa-phone"></i></a>
+                <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
+            </div>
+            <p> 2026 Ahmed Said Ahmed Abd El Hameed. <span data-key="rights">جميع الحقوق محفوظة.</span></p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem;" data-key="footer_subtitle">Web Developer & QA Specialist</p>
+        </div>
+    </footer>
+
+    <!-- Download CV Button (Fixed) -->
+    <button class="download-cv-btn" onclick="downloadCV()" title="تحميل السيرة الذاتية PDF">
+        <i class="fas fa-file-pdf"></i> <span data-key="download_cv">تحميل CV</span>
+    </button>
+
+    <!-- WhatsApp Button (Fixed) -->
+    <a href="https://wa.me/201555793108?text=مرحباً%20أحمد،%20أنا%20مهتم%20بخدماتك%20وأود%20التواصل%20معك" 
+       class="whatsapp-btn" 
+       target="_blank" 
+       data-tooltip="تواصل معي على WhatsApp"
+       title="تواصل معي على WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Admin Badge -->
+    <div class="admin-badge" id="adminBadge">
+        <i class="fas fa-shield-alt"></i> <span data-key="admin_mode">وضع المالك</span>
+    </div>
+
+    <!-- Admin Panel (Right Side) -->
+    <div class="admin-panel" id="adminPanel">
+        <button class="admin-btn" onclick="openAddProjectModal()" title="إضافة عمل جديد">
+            <i class="fas fa-plus"></i>
+        </button>
+        <button class="admin-btn" onclick="editPortfolio()" title="تعديل البورتفوليو">
+            <i class="fas fa-edit"></i>
+        </button>
+        <button class="admin-btn" onclick="openProfileImageModal()" title="تغيير الصورة الشخصية">
+            <i class="fas fa-camera"></i>
+        </button>
+        <button class="admin-btn" onclick="logout()" title="خروج">
+            <i class="fas fa-sign-out-alt"></i>
+        </button>
+    </div>
+
+    <!-- Add Project Modal -->
+    <div class="modal-overlay" id="addProjectModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2><i class="fas fa-plus-circle"></i> <span data-key="add_project_title">إضافة عمل جديد</span></h2>
+                <button class="modal-close" onclick="closeAddProjectModal()">&times;</button>
+            </div>
+            <form id="addProjectForm" onsubmit="addNewProject(event)">
+                <div class="form-group">
+                    <label data-key="project_name_label">اسم المشروع</label>
+                    <input type="text" id="projectName" required placeholder="مثال: تطبيق إدارة المخزون">
+                </div>
+                <div class="form-group">
+                    <label data-key="project_category_label">التصنيف</label>
+                    <select id="projectCategory" required>
+                        <option value="Web Development">Web Development</option>
+                        <option value="Desktop Apps">Desktop Apps</option>
+                        <option value="Automation">Automation</option>
+                        <option value="Mobile Apps">Mobile Apps</option>
+                        <option value="Other">أخرى</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label data-key="project_desc_label">وصف المشروع</label>
+                    <textarea id="projectDesc" required placeholder="اكتب وصفاً مختصراً للمشروع..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label data-key="project_image_label">صورة المشروع</label>
+                    <input type="file" id="projectImage" accept="image/*" onchange="previewImage(this, 'projectImagePreview')">
+                    <img id="projectImagePreview" class="image-preview" alt="Preview">
+                </div>
+                <div class="form-group">
+                    <label data-key="project_link_label">رابط المشروع (اختياري)</label>
+                    <input type="url" id="projectLink" placeholder="https://example.com">
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">
+                    <i class="fas fa-plus"></i> <span data-key="btn_add_project">إضافة المشروع</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Profile Image Modal -->
+    <div class="modal-overlay" id="profileImageModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2><i class="fas fa-camera"></i> <span data-key="change_photo_title">تغيير الصورة الشخصية</span></h2>
+                <button class="modal-close" onclick="closeProfileImageModal()">&times;</button>
+            </div>
+            <form id="profileImageForm" onsubmit="saveProfileImage(event)">
+                <div class="form-group">
+                    <label data-key="select_photo_label">اختر صورة شخصية</label>
+                    <input type="file" id="profileImageInput" accept="image/*" required onchange="previewImage(this, 'profilePreview')">
+                    <img id="profilePreview" class="image-preview" alt="Profile Preview" style="max-width: 200px; max-height: 200px; border-radius: 50%; margin: 1rem auto; display: block;">
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">
+                    <i class="fas fa-save"></i> <span data-key="btn_save_photo">حفظ الصورة</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Project Details Modal -->
+    <div class="modal-overlay" id="projectDetailsModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 id="detailTitle">تفاصيل المشروع</h2>
+                <button class="modal-close" onclick="closeProjectDetails()">&times;</button>
+            </div>
+            <div id="detailContent"></div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal-overlay login-modal" id="loginModal">
+        <div class="modal">
+            <div class="modal-header" style="justify-content: center;">
+                <h2><i class="fas fa-lock"></i> <span data-key="login_title">تسجيل الدخول</span></h2>
+            </div>
+            <p style="color: var(--text-muted); margin-bottom: 1.5rem;" data-key="login_desc">أدخل كلمة المرور للوصول إلى وضع التعديل</p>
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label data-key="password_label">كلمة المرور</label>
+                    <input type="password" id="passwordInput" required placeholder="••••••••">
+                </div>
+                <div class="login-error" id="loginError" data-key="wrong_password">كلمة المرور غير صحيحة!</div>
+                <div class="attempts-warning" id="attemptsWarning"></div>
+                <div class="lock-message" id="lockMessage" data-key="locked">تم تأمين التعديل لمدة 5 دقائق!</div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;" id="loginBtn">
+                    <i class="fas fa-sign-in-alt"></i> <span data-key="btn_login">دخول</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // ==================== LANGUAGE SYSTEM ====================
+        const translations = {
+            ar: {
+                nav_home: "الرئيسية",
+                nav_about: "عني",
+                nav_skills: "المهارات",
+                nav_portfolio: "أعمالي",
+                nav_experience: "الخبرة",
+                nav_contact: "تواصل",
+                hero_name: "Ahmed Said<br>Ahmed Abd El Hameed",
+                hero_title: "Web Developer & QA Specialist",
+                hero_bio: "مطور ويب متخصص في بناء تطبيقات الويب الحديثة باستخدام ASP.NET Core، React، و Node.js. خبير في أتمتة العمليات باستخدام n8n وضمان الجودة.",
+                btn_works: "أعمالي",
+                btn_contact: "تواصل معي",
+                about_title: "نبذة عني",
+                about_subtitle: "معلوماتي الشخصية والمهنية",
+                objective_title: "الهدف المهني",
+                objective_text: "الحصول على وظيفة بدوام كامل في شركة متعددة الجنسيات توفر بيئة عمل احترافية وتمكنني من النمو مع المساهمة في تحقيق أهداف الشركة.",
+                languages_title: "اللغات",
+                lang_arabic: "العربية",
+                lang_arabic_level: "اللغة الأم",
+                lang_english: "الإنجليزية",
+                lang_english_level: "كتابة ومحادثة جيدة",
+                personal_title: "المعلومات الشخصية",
+                birthdate: "تاريخ الميلاد",
+                nationality: "الجنسية",
+                nationality_value: "مصري",
+                military: "الخدمة العسكرية",
+                military_value: "معفى",
+                marital: "الحالة الاجتماعية",
+                marital_value: "متزوج",
+                soft_skills_title: "المهارات الشخصية",
+                soft_skill_1: "مبدع، موثوق، ذاتي التحفيز والتنظيم",
+                soft_skill_2: "مهارات تواصل وتفاوض ممتازة",
+                soft_skill_3: "مهارات حل مشكلات جيدة",
+                soft_skill_4: "مهارات إدارة ضغط العمل",
+                soft_skill_5: "القدرة على العمل فردياً وضمن فريق",
+                skills_title: "المهارات التقنية",
+                skills_subtitle: "التقنيات والأدوات التي أتقنها",
+                education_title: "التعليم والشهادات",
+                education_subtitle: "المؤهلات العلمية والدورات التدريبية",
+                edu_title: "التعليم",
+                university: "جامعة حلوان - كلية الحقوق",
+                degree: "بكالوريوس الحقوق | 2005 - 2011 | تقدير جيد",
+                certs_title: "الدورات والشهادات",
+                icdl_desc: "International Computer Driving License",
+                network_desc: "Self-study",
+                ccna_desc: "Self-study",
+                web_dev: "Web Development",
+                portfolio_title: "أعمالي و مشاريعي",
+                portfolio_subtitle: "المشاريع السابقة والأعمال المنفذة",
+                view_project: "عرض المشروع",
+                proj1_title: "تصميم وتطوير مواقع الويب",
+                proj1_desc: "بناء مواقع ويب متجاورة وحديثة باستخدام React, HTML/CSS, و JavaScript مع تحسين SEO",
+                proj2_title: "n8n Workflow Automation",
+                proj2_desc: "تصميم وتنفيذ سير عمل آلي باستخدام n8n تشمل تكامل APIs، معالجة البيانات، webhooks، المهام المجدولة، وربط خدمات متعددة",
+                proj3_title: "تطبيقات سطح المكتب (ASP.NET Core & MVC)",
+                proj3_desc: "تطوير تطبيقات سطح مكتب قابلة للتنفيذ (.exe) باستخدام C#, ASP.NET Core ومعمارية MVC مع تكامل قواعد البيانات",
+                btn_view: "عرض",
+                btn_download: "تحميل",
+                experience_title: "الخبرة العملية",
+                experience_subtitle: "مسيرتي المهنية والخبرات السابقة",
+                current: "حالياً",
+                previous: "سابقاً",
+                job_qa: "العمل عن بعد في مجال ضمان الجودة",
+                job_xceed: "الدعم الفني",
+                job_tedata2: "الدعم الفني المستوى الثاني والمتابعة",
+                job_tedata_field: "تركيب وصيانة ميدانية - قطاع حكومي",
+                job_tedata_salary: "إدارة رواتب القوى العاملة",
+                job_egyptsat: "شركة مصر للأقمار الصناعية - عامان",
+                job_casper: "كاسبر آند جامبينيز - مول العربية",
+                job_khan: "مشرف في مقهى الخان",
+                job_translation: "الترجمة بين الإنجليزية والعربية",
+                interests_title: "الاهتمامات",
+                interests_subtitle: "ما أحب القيام به في وقت فراغي",
+                interest_1: "استكشاف التقنيات الجديدة",
+                interest_1_desc: "التعلم الذاتي واستكشاف التقنيات الحديثة",
+                interest_2: "القراءة والسفر",
+                interest_2_desc: "قراءة الكتب والسفر لاستكشاف أماكن جديدة",
+                interest_3: "دورات تطوير الويب",
+                interest_3_desc: "التسويق بالعمولة وتطوير المهارات التقنية",
+                contact_title: "تواصل معي",
+                contact_subtitle: "معلومات التواصل",
+                address_title: "العنوان",
+                phone_title: "الهاتف",
+                email_title: "البريد الإلكتروني",
+                rights: "جميع الحقوق محفوظة.",
+                footer_subtitle: "Web Developer & QA Specialist",
+                download_cv: "تحميل CV",
+                admin_mode: "وضع المالك",
+                add_project_title: "إضافة عمل جديد",
+                project_name_label: "اسم المشروع",
+                project_category_label: "التصنيف",
+                project_desc_label: "وصف المشروع",
+                project_image_label: "صورة المشروع",
+                project_link_label: "رابط المشروع (اختياري)",
+                btn_add_project: "إضافة المشروع",
+                change_photo_title: "تغيير الصورة الشخصية",
+                select_photo_label: "اختر صورة شخصية",
+                btn_save_photo: "حفظ الصورة",
+                login_title: "تسجيل الدخول",
+                login_desc: "أدخل كلمة المرور للوصول إلى وضع التعديل",
+                password_label: "كلمة المرور",
+                wrong_password: "كلمة المرور غير صحيحة!",
+                locked: "تم تأمين التعديل لمدة 5 دقائق!",
+                btn_login: "دخول",
+                notification_project_added: "تم إضافة المشروع بنجاح!",
+                notification_photo_updated: "تم تحديث الصورة الشخصية!",
+                notification_logged_in: "تم تسجيل الدخول! وضع التعديل مفعل",
+                notification_logged_out: "تم الخروج من وضع التعديل",
+                notification_edit_mode: "وضع التعديل: يمكنك تعديل المحتوى مباشرة",
+                notification_changes_saved: "تم حفظ التغييرات!",
+                notification_lang_changed: "تم تغيير اللغة!",
+                notification_protected: "الأعمال للعرض فقط - لا يمكن التحميل",
+                download_preparing: "جاري تحضير السيرة الذاتية PDF..."
+            },
+            en: {
+                nav_home: "Home",
+                nav_about: "About",
+                nav_skills: "Skills",
+                nav_portfolio: "Portfolio",
+                nav_experience: "Experience",
+                nav_contact: "Contact",
+                hero_name: "Ahmed Said<br>Ahmed Abd El Hameed",
+                hero_title: "Web Developer & QA Specialist",
+                hero_bio: "A specialized web developer in building modern web applications using ASP.NET Core, React, and Node.js. Expert in process automation using n8n and quality assurance.",
+                btn_works: "My Works",
+                btn_contact: "Contact Me",
+                about_title: "About Me",
+                about_subtitle: "My personal and professional information",
+                objective_title: "Career Objective",
+                objective_text: "To obtain a full-time position in a multinational company that provides a professional work environment and enables me to grow while contributing to achieving the company's goals.",
+                languages_title: "Languages",
+                lang_arabic: "Arabic",
+                lang_arabic_level: "Native",
+                lang_english: "English",
+                lang_english_level: "Good writing and conversation",
+                personal_title: "Personal Information",
+                birthdate: "Date of Birth",
+                nationality: "Nationality",
+                nationality_value: "Egyptian",
+                military: "Military Service",
+                military_value: "Exempted",
+                marital: "Marital Status",
+                marital_value: "Married",
+                soft_skills_title: "Soft Skills",
+                soft_skill_1: "Creative, reliable, self-motivated and organized",
+                soft_skill_2: "Excellent communication and negotiation skills",
+                soft_skill_3: "Good problem-solving skills",
+                soft_skill_4: "Stress management skills",
+                soft_skill_5: "Ability to work individually and within a team",
+                skills_title: "Technical Skills",
+                skills_subtitle: "Technologies and tools I master",
+                education_title: "Education & Certificates",
+                education_subtitle: "Academic qualifications and training courses",
+                edu_title: "Education",
+                university: "Helwan University - Faculty of Law",
+                degree: "Bachelor of Law | 2005 - 2011 | Good Grade",
+                certs_title: "Courses & Certificates",
+                icdl_desc: "International Computer Driving License",
+                network_desc: "Self-study",
+                ccna_desc: "Self-study",
+                web_dev: "Web Development",
+                portfolio_title: "My Works & Projects",
+                portfolio_subtitle: "Previous projects and completed works",
+                view_project: "View Project",
+                proj1_title: "Web Design & Development",
+                proj1_desc: "Building modern and responsive websites using React, HTML/CSS, and JavaScript with SEO optimization",
+                proj2_title: "n8n Workflow Automation",
+                proj2_desc: "Designing and implementing automated workflows using n8n including API integrations, data processing, webhooks, scheduled tasks, and connecting multiple services",
+                proj3_title: "Desktop Applications (ASP.NET Core & MVC)",
+                proj3_desc: "Developing executable desktop applications (.exe) using C#, ASP.NET Core and MVC architecture with database integration",
+                btn_view: "View",
+                btn_download: "Download",
+                experience_title: "Work Experience",
+                experience_subtitle: "My career and previous experiences",
+                current: "Current",
+                previous: "Previous",
+                job_qa: "Remote work in quality assurance",
+                job_xceed: "Technical Support",
+                job_tedata2: "Second Level Technical Support and Follow Up",
+                job_tedata_field: "Field Installation & Repair - Government Sector",
+                job_tedata_salary: "Workforce Salary Management",
+                job_egyptsat: "Egypt Sat Company - 2 Years",
+                job_casper: "Casper & Gambini's, Mall of Arabia",
+                job_khan: "Supervisor at El Khan Cafe",
+                job_translation: "Translation: English - Arabic",
+                interests_title: "Interests",
+                interests_subtitle: "What I like to do in my free time",
+                interest_1: "Exploring New Technologies",
+                interest_1_desc: "Self-learning and exploring modern technologies",
+                interest_2: "Reading & Traveling",
+                interest_2_desc: "Reading books and traveling to explore new places",
+                interest_3: "Web Development Courses",
+                interest_3_desc: "Affiliate marketing and developing technical skills",
+                contact_title: "Contact Me",
+                contact_subtitle: "Contact Information",
+                address_title: "Address",
+                phone_title: "Phone",
+                email_title: "Email",
+                rights: "All rights reserved.",
+                footer_subtitle: "Web Developer & QA Specialist",
+                download_cv: "Download CV",
+                admin_mode: "Admin Mode",
+                add_project_title: "Add New Project",
+                project_name_label: "Project Name",
+                project_category_label: "Category",
+                project_desc_label: "Project Description",
+                project_image_label: "Project Image",
+                project_link_label: "Project Link (Optional)",
+                btn_add_project: "Add Project",
+                change_photo_title: "Change Profile Photo",
+                select_photo_label: "Select Profile Photo",
+                btn_save_photo: "Save Photo",
+                login_title: "Login",
+                login_desc: "Enter password to access edit mode",
+                password_label: "Password",
+                wrong_password: "Incorrect password!",
+                locked: "Editing locked for 5 minutes!",
+                btn_login: "Login",
+                notification_project_added: "Project added successfully!",
+                notification_photo_updated: "Profile photo updated!",
+                notification_logged_in: "Logged in! Edit mode activated",
+                notification_logged_out: "Logged out of edit mode",
+                notification_edit_mode: "Edit mode: You can edit content directly",
+                notification_changes_saved: "Changes saved!",
+                notification_lang_changed: "Language changed!",
+                notification_protected: "Works are for viewing only - cannot download",
+                download_preparing: "Preparing CV PDF..."
+            }
+        };
+
+        let currentLang = 'ar';
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'ar' ? 'en' : 'ar';
+            document.documentElement.lang = currentLang;
+            document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+            document.getElementById('langText').textContent = currentLang === 'ar' ? 'EN' : 'AR';
+
+            // Update all elements with data-key
+            document.querySelectorAll('[data-key]').forEach(el => {
+                const key = el.getAttribute('data-key');
+                if (translations[currentLang][key]) {
+                    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                        el.placeholder = translations[currentLang][key];
+                    } else {
+                        el.innerHTML = translations[currentLang][key];
+                    }
+                }
+            });
+
+            showNotification(translations[currentLang].notification_lang_changed);
+        }
+
+        // ==================== PASSWORD PROTECTION ====================
+        const ENCODED_PASSWORD = "YWhtZWQyMDI0"; // Base64 encoded "ahmed2024"
+        let loginAttempts = 0;
+        let isLocked = false;
+        let lockTimeout = null;
+        let isAdmin = false;
+
+        function decodePassword() {
+            try {
+                return atob(ENCODED_PASSWORD);
+            } catch(e) {
+                return "";
+            }
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+            if (isLocked) {
+                showNotification(translations[currentLang].locked);
+                return;
+            }
+
+            const input = document.getElementById('passwordInput').value;
+            const correctPassword = decodePassword();
+
+            if (input === correctPassword) {
+                isAdmin = true;
+                document.body.classList.add('admin-mode');
+                document.getElementById('adminPanel').classList.add('active');
+                document.getElementById('adminBadge').classList.add('active');
+                closeLoginModal();
+                document.getElementById('loginForm').reset();
+                loginAttempts = 0;
+                showNotification(translations[currentLang].notification_logged_in);
+            } else {
+                loginAttempts++;
+                const errorEl = document.getElementById('loginError');
+                errorEl.classList.add('show');
+                document.getElementById('loginForm').classList.add('shake');
+                setTimeout(() => document.getElementById('loginForm').classList.remove('shake'), 500);
+
+                if (loginAttempts >= 3) {
+                    isLocked = true;
+                    document.getElementById('lockMessage').classList.add('show');
+                    document.getElementById('loginBtn').disabled = true;
+                    lockTimeout = setTimeout(() => {
+                        isLocked = false;
+                        loginAttempts = 0;
+                        document.getElementById('lockMessage').classList.remove('show');
+                        document.getElementById('loginBtn').disabled = false;
+                    }, 300000); // 5 minutes
+                }
+            }
+        }
+
+        function logout() {
+            isAdmin = false;
+            document.body.classList.remove('admin-mode');
+            document.getElementById('adminPanel').classList.remove('active');
+            document.getElementById('adminBadge').classList.remove('active');
+
+            // Remove edit mode
+            document.querySelectorAll('[contenteditable="true"]').forEach(el => {
+                el.contentEditable = false;
+                el.style.border = '';
+            });
+            const saveBtn = document.querySelector('.save-edit-btn');
+            if (saveBtn) saveBtn.remove();
+
+            showNotification(translations[currentLang].notification_logged_out);
+        }
+
+        // ==================== LOGIN MODAL ====================
+        function openLoginModal() {
+            if (isAdmin) return;
+            document.getElementById('loginModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+            document.getElementById('passwordInput').focus();
+        }
+
+        function closeLoginModal() {
+            document.getElementById('loginModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+            document.getElementById('loginError').classList.remove('show');
+        }
+
+        // Secret login triggers
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.shiftKey && e.key === 'A') {
+                e.preventDefault();
+                openLoginModal();
+            }
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.modal-overlay.active').forEach(m => m.classList.remove('active'));
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Triple click on header/footer to open login
+        let clickCount = 0;
+        let clickTimer;
+        document.querySelector('.nav-logo').addEventListener('click', function(e) {
+            e.preventDefault();
+            clickCount++;
+            clearTimeout(clickTimer);
+            clickTimer = setTimeout(() => clickCount = 0, 500);
+            if (clickCount >= 3) {
+                clickCount = 0;
+                openLoginModal();
+            }
+        });
+
+        // ==================== PROFILE IMAGE ====================
+        function openProfileImageModal() {
+            if (!isAdmin) {
+                openLoginModal();
+                return;
+            }
+            document.getElementById('profileImageModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeProfileImageModal() {
+            document.getElementById('profileImageModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+            document.getElementById('profileImageForm').reset();
+            document.getElementById('profilePreview').style.display = 'none';
+        }
+
+        function saveProfileImage(event) {
+            event.preventDefault();
+            const input = document.getElementById('profileImageInput');
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = document.getElementById('profileImage');
+                    const placeholder = document.getElementById('profilePlaceholder');
+                    img.src = e.target.result;
+                    img.classList.add('active');
+                    placeholder.classList.add('hidden');
+
+                    // Save to localStorage
+                    localStorage.setItem('profileImage', e.target.result);
+                    showNotification(translations[currentLang].notification_photo_updated);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+            closeProfileImageModal();
+        }
+
+        // Load saved profile image
+        window.addEventListener('load', function() {
+            const savedImage = localStorage.getItem('profileImage');
+            if (savedImage) {
+                const img = document.getElementById('profileImage');
+                const placeholder = document.getElementById('profilePlaceholder');
+                img.src = savedImage;
+                img.classList.add('active');
+                placeholder.classList.add('hidden');
+            }
+        });
+
+        // ==================== PROJECTS ====================
+        function openAddProjectModal() {
+            if (!isAdmin) {
+                openLoginModal();
+                return;
+            }
+            document.getElementById('addProjectModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeAddProjectModal() {
+            document.getElementById('addProjectModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+            document.getElementById('addProjectForm').reset();
+            document.getElementById('projectImagePreview').classList.remove('show');
+        }
+
+        function addNewProject(event) {
+            event.preventDefault();
+            const name = document.getElementById('projectName').value;
+            const category = document.getElementById('projectCategory').value;
+            const desc = document.getElementById('projectDesc').value;
+            const link = document.getElementById('projectLink').value;
+            const imageInput = document.getElementById('projectImage');
+
+            const projectsContainer = document.getElementById('projectsContainer');
+            const newCard = document.createElement('div');
+            newCard.className = 'project-card animate-fade-in';
+            newCard.style.opacity = '1';
+
+            let imageHtml = '<i class="fas fa-code"></i>';
+            if (imageInput.files && imageInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const imgDiv = newCard.querySelector('.project-image');
+                    imgDiv.innerHTML = `<img src="${e.target.result}" alt="${name}"><div class="project-overlay"><span><i class="fas fa-eye"></i> ${translations[currentLang].view_project}</span></div>`;
+                };
+                reader.readAsDataURL(imageInput.files[0]);
+            }
+
+            newCard.innerHTML = `
+                <div class="project-image">${imageHtml}
+                    <div class="project-overlay">
+                        <span><i class="fas fa-eye"></i> ${translations[currentLang].view_project}</span>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <span class="project-category">${category}</span>
+                    <h3 class="project-title">${name}</h3>
+                    <p class="project-desc">${desc}</p>
+                    <div class="project-actions">
+                        <button class="project-btn project-btn-view" onclick="showProjectDetails('custom')">
+                            <i class="fas fa-eye"></i> ${translations[currentLang].btn_view}
+                        </button>
+                        <button class="project-btn project-btn-disabled" disabled title="Works are for viewing only">
+                            <i class="fas fa-lock"></i> ${translations[currentLang].btn_download}
+                        </button>
+                        <button class="project-btn project-delete-btn" onclick="deleteProject(this)">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            `;
+            projectsContainer.appendChild(newCard);
+            closeAddProjectModal();
+            showNotification(translations[currentLang].notification_project_added);
+        }
+
+        function deleteProject(btn) {
+            if (!isAdmin) return;
+            if (confirm(currentLang === 'ar' ? 'هل أنت متأكد من حذف هذا المشروع؟' : 'Are you sure you want to delete this project?')) {
+                btn.closest('.project-card').remove();
+                showNotification(currentLang === 'ar' ? 'تم حذف المشروع!' : 'Project deleted!');
+            }
+        }
+
+        function previewImage(input, previewId) {
+            const preview = document.getElementById(previewId);
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.classList.add('show');
+                    preview.style.display = 'block';
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        // ==================== PROJECT DETAILS ====================
+        function showProjectDetails(type) {
+            const modal = document.getElementById('projectDetailsModal');
+            const title = document.getElementById('detailTitle');
+            const content = document.getElementById('detailContent');
+
+            const details = {
+                'web': {
+                    title: currentLang === 'ar' ? 'تصميم وتطوير مواقع الويب' : 'Web Design & Development',
+                    content: `<div style="text-align: center; padding: 2rem;">
+                        <i class="fas fa-globe" style="font-size: 4rem; color: var(--secondary); margin-bottom: 1rem;"></i>
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">${currentLang === 'ar' ? 'تصميم وتطوير مواقع الويب' : 'Web Design & Development'}</h3>
+                        <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 2rem;">${currentLang === 'ar' ? 'بناء مواقع ويب متجاورة وحديثة باستخدام أحدث التقنيات:' : 'Building modern and responsive websites using the latest technologies:'}</p>
+                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-bottom: 2rem;">
+                            <span class="skill-tag">React</span><span class="skill-tag">HTML5</span><span class="skill-tag">CSS3</span>
+                            <span class="skill-tag">JavaScript</span><span class="skill-tag">SEO</span><span class="skill-tag">Responsive</span>
+                        </div>
+                        <div class="project-actions" style="justify-content: center;">
+                            <button class="project-btn project-btn-disabled" disabled><i class="fas fa-lock"></i> ${currentLang === 'ar' ? 'الأعمال للعرض فقط' : 'Works for viewing only'}</button>
+                        </div>
+                    </div>`
+                },
+                'automation': {
+                    title: 'n8n Workflow Automation',
+                    content: `<div style="text-align: center; padding: 2rem;">
+                        <i class="fas fa-cogs" style="font-size: 4rem; color: var(--secondary); margin-bottom: 1rem;"></i>
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">n8n Workflow Automation</h3>
+                        <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 2rem;">${currentLang === 'ar' ? 'تصميم وتنفيذ سير عمل آلي باستخدام n8n:' : 'Designing and implementing automated workflows using n8n:'}</p>
+                        <ul style="text-align: ${currentLang === 'ar' ? 'right' : 'left'}; color: var(--text-muted); line-height: 2; margin-bottom: 2rem; list-style: none; ${currentLang === 'ar' ? '' : 'padding-left: 2rem;'}">
+                            <li><i class="fas fa-check" style="color: var(--secondary);"></i> ${currentLang === 'ar' ? 'تكامل APIs' : 'API Integrations'}</li>
+                            <li><i class="fas fa-check" style="color: var(--secondary);"></i> ${currentLang === 'ar' ? 'معالجة البيانات' : 'Data Processing'}</li>
+                            <li><i class="fas fa-check" style="color: var(--secondary);"></i> Webhooks</li>
+                            <li><i class="fas fa-check" style="color: var(--secondary);"></i> ${currentLang === 'ar' ? 'المهام المجدولة' : 'Scheduled Tasks'}</li>
+                            <li><i class="fas fa-check" style="color: var(--secondary);"></i> ${currentLang === 'ar' ? 'ربط خدمات متعددة' : 'Connecting Multiple Services'}</li>
+                        </ul>
+                        <div class="project-actions" style="justify-content: center;">
+                            <button class="project-btn project-btn-disabled" disabled><i class="fas fa-lock"></i> ${currentLang === 'ar' ? 'الأعمال للعرض فقط' : 'Works for viewing only'}</button>
+                        </div>
+                    </div>`
+                },
+                'desktop': {
+                    title: currentLang === 'ar' ? 'تطبيقات سطح المكتب' : 'Desktop Applications',
+                    content: `<div style="text-align: center; padding: 2rem;">
+                        <i class="fas fa-desktop" style="font-size: 4rem; color: var(--secondary); margin-bottom: 1rem;"></i>
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">${currentLang === 'ar' ? 'تطبيقات سطح المكتب' : 'Desktop Applications'}</h3>
+                        <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 2rem;">${currentLang === 'ar' ? 'تطوير تطبيقات سطح مكتب قابلة للتنفيذ (.exe):' : 'Developing executable desktop applications (.exe):'}</p>
+                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-bottom: 2rem;">
+                            <span class="skill-tag">C#</span><span class="skill-tag">ASP.NET Core</span>
+                            <span class="skill-tag">MVC</span><span class="skill-tag">MySQL</span><span class="skill-tag">.exe</span>
+                        </div>
+                        <div class="project-actions" style="justify-content: center;">
+                            <button class="project-btn project-btn-disabled" disabled><i class="fas fa-lock"></i> ${currentLang === 'ar' ? 'الأعمال للعرض فقط' : 'Works for viewing only'}</button>
+                        </div>
+                    </div>`
+                }
+            };
+
+            const detail = details[type] || { title: currentLang === 'ar' ? 'مشروع جديد' : 'New Project', content: '<p>Details coming soon...</p>' };
+            title.innerHTML = `<i class="fas fa-folder-open"></i> ${detail.title}`;
+            content.innerHTML = detail.content;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeProjectDetails() {
+            document.getElementById('projectDetailsModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // ==================== EDIT PORTFOLIO ====================
+        function editPortfolio() {
+            if (!isAdmin) {
+                openLoginModal();
+                return;
+            }
+            showNotification(translations[currentLang].notification_edit_mode);
+            document.querySelectorAll('.cv-card, .project-card, .timeline-content, .hero-text h1, .hero-text .subtitle, .hero-text .bio').forEach(el => {
+                el.contentEditable = true;
+                el.style.border = '2px dashed var(--secondary)';
+            });
+
+            const saveBtn = document.createElement('button');
+            saveBtn.className = 'btn btn-primary save-edit-btn';
+            saveBtn.style.cssText = 'position: fixed; bottom: 2rem; right: 2rem; z-index: 1000; display: inline-flex; align-items: center; gap: 0.5rem;';
+            saveBtn.innerHTML = '<i class="fas fa-save"></i> ' + (currentLang === 'ar' ? 'حفظ التغييرات' : 'Save Changes');
+            saveBtn.onclick = function() {
+                document.querySelectorAll('[contenteditable="true"]').forEach(el => {
+                    el.contentEditable = false;
+                    el.style.border = '';
+                });
+                this.remove();
+                showNotification(translations[currentLang].notification_changes_saved);
+            };
+            document.body.appendChild(saveBtn);
+        }
+
+        // ==================== DOWNLOAD CV ====================
+        function downloadCV() {
+            showNotification(translations[currentLang].download_preparing);
+            setTimeout(() => {
+                window.print();
+            }, 1000);
+        }
+
+        // ==================== NAVBAR SCROLL ====================
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Animation on Scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        document.querySelectorAll('.animate-fade-in').forEach(el => observer.observe(el));
+
+        // ==================== NOTIFICATION ====================
+        function showNotification(message) {
+            const notif = document.createElement('div');
+            notif.style.cssText = `position: fixed; top: 2rem; left: 50%; transform: translateX(-50%); 
+                background: var(--primary); color: white; padding: 1rem 2rem; border-radius: 50px; 
+                font-weight: 600; z-index: 3000; animation: fadeInUp 0.3s ease; 
+                box-shadow: 0 4px 20px rgba(0,0,0,0.2); font-family: inherit;`;
+            notif.textContent = message;
+            document.body.appendChild(notif);
+            setTimeout(() => {
+                notif.style.animation = 'fadeInUp 0.3s ease reverse';
+                setTimeout(() => notif.remove(), 300);
+            }, 3000);
+        }
+
+        // ==================== MODAL CLOSE ON OUTSIDE CLICK ====================
+        document.querySelectorAll('.modal-overlay').forEach(modal => {
+            modal.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    this.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        });
+
+        // ==================== CONTENT PROTECTION ====================
+        document.getElementById('portfolio').addEventListener('contextmenu', function(e) {
+            if (e.target.closest('.project-card')) {
+                e.preventDefault();
+                showNotification(translations[currentLang].notification_protected);
+            }
+        });
+
+        document.getElementById('portfolio').addEventListener('dragstart', function(e) {
+            if (e.target.closest('.project-card')) {
+                e.preventDefault();
+            }
+        });
+
+        console.log('🚀 Portfolio loaded successfully!');
+        console.log('👤 Ahmed Said - Web Developer & QA Specialist');
+        console.log('🔒 Protected with password authentication');
+        console.log('🌍 Language toggle: Click EN/AR button');
+        console.log('📸 Profile image: Login as admin to change');
+    </script>
+
+    <!-- Login Button (Visible) -->
+    <button class="login-btn" onclick="openLoginModal()" title="تسجيل الدخول / Login">
+        <i class="fas fa-lock"></i>
+    </button>
+
+</body>
+</html>
